@@ -90,7 +90,7 @@ def dibujar_encabezado(lienzo: CanvasTipo, configuracion: LayoutConfig) -> None:
         altura_apr,
         anchor="right",
     )
-"""
+
     titulo = configuracion.titulo_encabezado
     lienzo.setFont(configuracion.fuente_encabezado, configuracion.tamano_marca_encabezado)
     #lienzo.setFillColor(colors.white)
@@ -99,10 +99,14 @@ def dibujar_encabezado(lienzo: CanvasTipo, configuracion: LayoutConfig) -> None:
         centro_y - configuracion.tamano_marca_encabezado / 3,
         titulo,
     )
-""""""
+
     lienzo.setStrokeColor(configuracion.color_secundario)
     lienzo.setLineWidth(1.2)
-    lienzo.line(configuracion.margen_x, limite_inferior, ancho_pagina - configuracion.margen_x, limite_inferior)
+    lienzo.line(
+        configuracion.margen_x,
+        limite_inferior,
+        ancho_pagina - configuracion.margen_x,
+        limite_inferior,
+    )
     lienzo.restoreState()
-"""
 
