@@ -27,6 +27,7 @@ class CatalogoRenderizador:
 
     def renderizar(self, catalogo: Catalogo, ruta_pdf: str) -> None:
         """Genera un PDF ubicando las categorias y productos en paginas."""
+        self._pagina_iniciada = False
         preparar_fuentes(self.configuracion)
         lienzo = canvas.Canvas(str(Path(ruta_pdf)), pagesize=A4)
         ancho_pagina, alto_pagina = A4
@@ -54,7 +55,12 @@ class CatalogoRenderizador:
         else:
             self._pagina_iniciada = True
         dibujar_encabezado(lienzo, self.configuracion)
-        return alto_pagina - self.configuracion.margen_y - self.configuracion.altura_encabezado - self.configuracion.separacion_encabezado
+        return (
+            alto_pagina
+            - self.configuracion.margen_y
+            - self.configuracion.altura_encabezado
+            - self.configuracion.separacion_encabezado
+        )
 
     def _renderizar_categoria(
         self,
@@ -68,7 +74,11 @@ class CatalogoRenderizador:
     ) -> float:
         configuracion = self.configuracion
         icono = categoria.icono_predeterminado
-        altura_requerida = configuracion.altura_banner_categoria + configuracion.altura_minima_tarjeta + configuracion.separacion_filas
+        altura_requerida = (
+            configuracion.altura_banner_categoria
+            + configuracion.altura_minima_tarjeta
+            + configuracion.separacion_filas
+        )
 
         if y_cursor - altura_requerida < configuracion.margen_y:
             y_cursor = self._iniciar_pagina(lienzo, alto_pagina)
